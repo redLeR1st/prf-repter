@@ -1,0 +1,33 @@
+<div class="example-container">
+    <form [formGroup]="angForm">
+      <div fxLayout="column" fxLayoutAlign="space-around center" >
+        <div class="form-group">
+          <mat-form-field>
+            <input matInput placeholder="Hotel name" formControlName = "hotelname">
+          </mat-form-field>
+        </div>
+        
+        <div class="form-group">
+          <mat-form-field>
+            <input matInput placeholder="Hotel fullname" formControlName = "hotelfullname">
+          </mat-form-field>
+        </div>
+        
+        <div class="form-group">
+          <mat-form-field>
+            <input type="number" matInput placeholder="Number of rooms" formControlName = "roomnumber">
+          </mat-form-field>
+        </div>
+        
+        <div class="form-group">
+          <mat-form-field>
+            <input type="number" matInput placeholder="Available rooms" formControlName = "availablerooms">
+          </mat-form-field>
+        </div>
+        
+        <div class="form-group">
+          <button mat-button type="submit" (click)="addHotel(angForm.value)" [disabled]="angForm.pristine || angForm.invalid">ENTER</button>
+        </div>
+      </div>
+    </form>
+  </div>

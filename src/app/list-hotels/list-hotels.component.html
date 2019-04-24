@@ -1,0 +1,55 @@
+<mat-accordion>
+    <mat-expansion-panel *ngFor="let hotel of hotels">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <!-- Personal data -->
+          {{hotel.qname}}
+        </mat-panel-title>
+        <mat-panel-description>
+          <!-- Type your name and age -->
+          {{hotel.fullname}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+  
+      <mat-form-field>
+        <input matInput placeholder="First name">
+      </mat-form-field>
+  <br>
+      <mat-form-field>
+        <input matInput placeholder="Age">
+      </mat-form-field>
+    </mat-expansion-panel>
+    <!-- <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Self aware panel
+        </mat-panel-title>
+        <mat-panel-description>
+          Currently I am {{panelOpenState ? 'open' : 'closed'}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>I'm visible because I am open</p>
+    </mat-expansion-panel> -->
+</mat-accordion>
+
+<!-- <table class="table table-hover">
+    <thead>
+    <tr>
+        <td>USERNAME</td>
+        <td>FULLNAME</td>
+        <td>GST Number</td>
+        <td colspan="2">Actions</td>
+    </tr>
+    </thead>
+  
+    <tbody>
+        <tr *ngFor="let user of users">
+            <td>{{ user.username }}</td>
+            <td>{{ user.fullname }}</td>
+            <td>{{ business.business_gst_number }}</td>
+            <td><a [routerLink]="['/edit', business._id]" class="btn btn-primary">Edit</a></td>
+            <td><a [routerLink]="" class="btn btn-danger">Delete</a></td>
+        </tr>
+    </tbody>
+  </table> -->
