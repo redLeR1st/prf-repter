@@ -1,24 +1,28 @@
 <div class="example-container">
   <form [formGroup]="angForm" novalidate>
-    <div fxLayout="column" fxLayoutAlign="space-around center" >
-      <mat-form-field>
-        <div class="form-group">
+    <div fxLayout="column" fxLayoutAlign="space-around center">
+      
+      <div class="form-group">
+        <mat-form-field>
           <input matInput placeholder="Username" formControlName="username">
-        </div>
-        <div *ngIf="angForm.controls['username'].invalid && (angForm.controls['username'].dirty || angForm.controls['username'].touched)" class="alert alert-danger">
-          <mat-error *ngIf="angForm.controls['username'].errors.required">
-            Required
-          </mat-error>
-        </div>
-      </mat-form-field>
+        </mat-form-field>
+      </div>
       
-      <mat-form-field>
-        <input type="password" matInput placeholder="Password">
-      </mat-form-field>
+      <div class="form-group">
+        <mat-form-field>
+          <input type="password" matInput placeholder="Password" formControlName="password">
+        </mat-form-field>
+      </div>
       
-      
-      <a mat-button>ENTER</a>
-    
+      <div class="form-group">
+        <button mat-button type="submit" (click)="login(angForm.value)">ENTER</button>
+      </div>
+      <mat-error *ngIf="msg == 'Forbidden'">
+          Bad username or password
+      </mat-error>
+      <mat-error *ngIf="msg == 'OK'">
+          Successfully logged in! :)
+      </mat-error>
     </div>
   </form>
 </div>

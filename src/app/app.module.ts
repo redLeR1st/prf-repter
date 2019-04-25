@@ -11,6 +11,9 @@ import { ListHotelsComponent } from './list-hotels/list-hotels.component';
 import { LoginComponent } from './login/login.component';
 import { AddHotelComponent } from './add-hotel/add-hotel.component';
 
+import { AlertComponent } from './directives/index';
+import { AlertService } from './services/index';
+
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatToolbarModule,
@@ -34,7 +37,8 @@ import { SignupService } from './signup.service';
     SignupComponent,
     ListHotelsComponent,
     LoginComponent,
-    AddHotelComponent
+    AddHotelComponent,
+    AlertComponent
   ],
   imports: [
     SlimLoadingBarModule,
@@ -53,7 +57,10 @@ import { SignupService } from './signup.service';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [SignupService],
+  providers: [
+    SignupService,
+    AlertService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

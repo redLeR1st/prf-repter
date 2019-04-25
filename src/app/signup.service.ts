@@ -1,19 +1,37 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-// import { user } from './model/user';
-// import { user } from './model/user'
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SignupService {
-  
-
   uri = 'https://prf-hotel-app.herokuapp.com';
   // uri = 'http://localhost:5000';
 
 
   constructor(private http: HttpClient) { }
+
+
+  login(username: any, password: any) {
+    var obj = {
+      username: username,
+      password: password
+    }
+
+    console.log("login: POST")
+    return this.http.post(`${this.uri}/login`, obj, {responseType: "text", withCredentials: true})
+    .catch(this.errorHandler);
+
+  }
+  errorHandler(error: HttpErrorResponse) {
+    return Observable.throw(error.message || "Server Error");
+  }
+  
+
+ 
 
   signup(username, fullname, password, email) {
     const obj = {
@@ -24,7 +42,7 @@ export class SignupService {
       admin: false
     };
     console.log("signup: POST")
-    this.http.post(`${this.uri}/register`, obj, {responseType: "text"/*, withCredentials: true*/})
+    this.http.post(`${this.uri}/register`, obj, {responseType: "text", withCredentials: true})
         .subscribe(res => console.log('Done'));
   }
 
@@ -37,7 +55,7 @@ export class SignupService {
       image: "test"
     };
     console.log("signup: POST")
-    this.http.post(`${this.uri}/new-hotel`, obj, {responseType: "text"/*, withCredentials: true*/})
+    this.http.post(`${this.uri}/new-hotel`, obj, {responseType: "text", withCredentials: true})
         .subscribe(res => console.log('Done'));
 
   }
@@ -46,7 +64,7 @@ export class SignupService {
   getHotels() {
     return this
            .http
-           .get(`${this.uri}/hotels`);
+           .get(`${this.uri}/hotels`, {withCredentials: true});
   }
 
   getUsers() {
@@ -55,12 +73,9 @@ export class SignupService {
       { "username": "uname1", "fullname": "Ready" },
       { "username": "uname2", "fullname": "Started" }
   ];
-  // var users: user[]
+  
     return userTestStatus
 
-    // return this
-    //        .http
-    //        .get(`${this.uri}`);
   }
 
 
