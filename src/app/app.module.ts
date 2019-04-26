@@ -31,6 +31,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SignupService } from './signup.service';
 
+import { MatFileUploadModule } from 'angular-material-fileupload';
+
+// import { Upload } from 'material-ui-upload/Upload';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +59,9 @@ import { SignupService } from './signup.service';
     MatInputModule,
     MatExpansionModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatFileUploadModule,
+    // Upload
   ],
   providers: [
     SignupService,

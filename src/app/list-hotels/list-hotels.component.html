@@ -10,14 +10,12 @@
           {{hotel.fullname}}
         </mat-panel-description>
       </mat-expansion-panel-header>
-  
-      <mat-form-field>
-        <input matInput placeholder="First name">
-      </mat-form-field>
-  <br>
-      <mat-form-field>
-        <input matInput placeholder="Age">
-      </mat-form-field>
+      <h1>{{hotel.room_number}}</h1>
+      <br>
+      <h1>{{hotel.availalble_rooms}}</h1>
+      <h1>{{hotel.image}}</h1>
+      <img src="{{hotel.image}}">
+
     </mat-expansion-panel>
     <!-- <mat-expansion-panel (opened)="panelOpenState = true"
                          (closed)="panelOpenState = false">

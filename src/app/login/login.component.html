@@ -15,7 +15,7 @@
       </div>
       
       <div class="form-group">
-        <button mat-button type="submit" (click)="login(angForm.value)">ENTER</button>
+        <button mat-button type="submit" (click)="login(angForm.value)" [disabled]="angForm.pristine || angForm.invalid">ENTER</button>
       </div>
       <mat-error *ngIf="msg == 'Forbidden'">
           Bad username or password

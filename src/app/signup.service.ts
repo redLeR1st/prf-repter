@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs';
+import user from './model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,10 @@ export class SignupService {
   uri = 'https://prf-hotel-app.herokuapp.com';
   // uri = 'http://localhost:5000';
 
-
-  constructor(private http: HttpClient) { }
-
+ 
+  constructor(private http: HttpClient) { 
+   
+  }
 
   login(username: any, password: any) {
     var obj = {
@@ -46,13 +48,13 @@ export class SignupService {
         .subscribe(res => console.log('Done'));
   }
 
-  addHotel(hotelname, hotelfullname, roomnumber, availablerooms) {
+  addHotel(hotelname, hotelfullname, roomnumber, availablerooms, image) {
     const obj = {
       qname: hotelname,
       fullname: hotelfullname,
       room_number: roomnumber,
       availalble_rooms: availablerooms,
-      image: "test"
+      image: image
     };
     console.log("signup: POST")
     this.http.post(`${this.uri}/new-hotel`, obj, {responseType: "text", withCredentials: true})
@@ -73,7 +75,7 @@ export class SignupService {
       { "username": "uname1", "fullname": "Ready" },
       { "username": "uname2", "fullname": "Started" }
   ];
-  
+
     return userTestStatus
 
   }

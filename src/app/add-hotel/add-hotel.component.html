@@ -24,9 +24,21 @@
             <input type="number" matInput placeholder="Available rooms" formControlName = "availablerooms">
           </mat-form-field>
         </div>
+
+        <!-- <Upload label="Add" onFileLoad={this.onFileLoad}/> -->
+        <div class="container">
+            <input #fileUpload type="file" (click)="fileUpload.value = null"(change)="importFile($event)" style="display:none"
+              accept="image/*">
+            <button (click)="fileUpload.click()"> Upload </button>
+          </div>
+        <!-- <div class="form-group">
+          <mat-form-field>
+            <input matInput type="file" placeholder="Pictures" formControlName = "pictures">
+          </mat-form-field>
+        </div> -->
         
         <div class="form-group">
-          <button mat-button type="submit" (click)="addHotel(angForm.value)" [disabled]="angForm.pristine || angForm.invalid">ENTER</button>
+          <button mat-button color="primary" type="submit" (click)="addHotel(angForm.value)" [disabled]="angForm.pristine || angForm.invalid">ENTER</button>
         </div>
       </div>
     </form>
