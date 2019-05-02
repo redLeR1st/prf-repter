@@ -1,0 +1,24 @@
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let user of users">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{user.username}}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{user.fullname}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <h2>Email</h2>
+    <h3>{{user.email}}</h3>
+    <br>
+    <h2>Admin</h2>
+    <h3 *ngIf="user.admin">
+      Yes
+    </h3>
+    <h3 *ngIf="!user.admin">
+      No
+    </h3>
+    
+    <button color = "warn" mat-button>Delete</button>
+  </mat-expansion-panel>
+</mat-accordion>

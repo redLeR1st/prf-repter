@@ -38,6 +38,7 @@ import { CommonModule } from '@angular/common';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
 import {MatCardModule} from '@angular/material/card';
+import { ListUsersComponent } from './list-users/list-users.component';
 
 // import { Upload } from 'material-ui-upload/Upload';
 
@@ -49,7 +50,8 @@ import {MatCardModule} from '@angular/material/card';
     LoginComponent,
     AddHotelComponent,
     AlertComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    ListUsersComponent
   ],
   imports: [
     SlimLoadingBarModule,

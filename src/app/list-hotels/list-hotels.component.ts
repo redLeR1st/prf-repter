@@ -14,9 +14,8 @@ export class ListHotelsComponent implements OnInit {
 
   isAdmin = false;
   user: user;
-
-
   hotels: hotel[];
+  
   constructor(private sv: SignupService, private app: AppComponent) { }
 
   ngOnInit() {

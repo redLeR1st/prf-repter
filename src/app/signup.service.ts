@@ -9,6 +9,9 @@ import user from './model/user';
   providedIn: 'root'
 })
 export class SignupService {
+  delete_user() {
+    throw new Error("Method not implemented.");
+  }
 
   uri = 'https://prf-hotel-app.herokuapp.com';
   // uri = 'http://localhost:5000';
@@ -18,7 +21,6 @@ export class SignupService {
    
   }
 
-
   login(username: any, password: any) {
     var obj = {
       username: username,
@@ -26,7 +28,7 @@ export class SignupService {
     }
 
     console.log("login: POST")
-    return this.http.post(`${this.uri}/login`, obj, {responseType: "text", withCredentials: true})
+    return this.http.post(`${this.uri}/login`, obj, { withCredentials: true})
     .catch(this.errorHandler);
 
   }
@@ -46,7 +48,7 @@ export class SignupService {
       admin: false
     };
     console.log("signup: POST")
-    this.http.post(`${this.uri}/register`, obj, {responseType: "text", withCredentials: true})
+    this.http.post(`${this.uri}/register`, obj, {responseType: "json", withCredentials: true})
         .subscribe(res => console.log('Done'));
   }
 
@@ -60,7 +62,7 @@ export class SignupService {
     };
     console.log("OBJ: ");
     console.log(obj);
-    this.http.post(`${this.uri}/new-hotel`, obj, {responseType: "text", withCredentials: true})
+    this.http.post(`${this.uri}/new-hotel`, obj, {responseType: "json", withCredentials: true})
         .subscribe(res => console.log('Done'));
 
   }
@@ -69,30 +71,37 @@ export class SignupService {
   getHotels() {
     return this
            .http
-           .get(`${this.uri}/hotels`, {withCredentials: true});
+           .get(`${this.uri}/hotels`, {responseType: "json", withCredentials: true});
   }
-
+  
   getUsers() {
-    let userTestStatus: { username: string, fullname: string }[] = [
-      { "username": "uname0", "fullname": "Available" },
-      { "username": "uname1", "fullname": "Ready" },
-      { "username": "uname2", "fullname": "Started" }
-  ];
-
-    return userTestStatus
-
+    return this
+           .http
+           .get(`${this.uri}/users`, {responseType: "json", withCredentials: true});
   }
+
+  // getUsers() {
+  //   let userTestStatus: { username: string, fullname: string }[] = [
+  //     { "username": "uname0", "fullname": "Available" },
+  //     { "username": "uname1", "fullname": "Ready" },
+  //     { "username": "uname2", "fullname": "Started" }
+  // ];
+
+  //   return userTestStatus
+
+  // }
 
   loged_in_user() {
     return this
            .http
-           .get(`${this.uri}/logged-in-user`, {withCredentials: true});
+           .get(`${this.uri}/logged-in-user`, {responseType: "json", withCredentials: true});
   }
 
   log_out() {
     this
         .http
-        .post(`${this.uri}/logout`, {withCredentials: true});
+        .post(`${this.uri}/logout`, {responseType: "json", withCredentials: true})
+        .subscribe(res => console.log('Done'));
   }
 
   reservate(qnmae, username, room_number) {
@@ -105,8 +114,8 @@ export class SignupService {
     console.log(obj);
     this
         .http
-        .post(`${this.uri}/reservate`, obj/*, {withCredentials: true}*/)
-        .subscribe(res => console.log('Done'));;
+        .post(`${this.uri}/reservate`, obj, {responseType: "json", withCredentials: true})
+        .subscribe(res => console.log('Done'));
   }
 
 }

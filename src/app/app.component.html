@@ -7,6 +7,7 @@
     <mat-menu #menu="matMenu">
       <a  mat-menu-item routerLink="listhotels" class="nav-link" routerLinkActive="active">Hotels</a>
       <a  *ngIf="user && user.admin" mat-menu-item routerLink="addhotel" class="nav-link" routerLinkActive="active">Add hotel</a>
+      <a  *ngIf="user && user.admin" mat-menu-item routerLink="listusers" class="nav-link" routerLinkActive="active">List users</a>
     </mat-menu>
     <span class = "gap"></span>
     <span class = "filler"></span>

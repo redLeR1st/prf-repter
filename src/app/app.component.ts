@@ -26,6 +26,9 @@ export class AppComponent implements OnInit {
       .subscribe((data: user) => {
         this.user = data;
         console.log(this.user);
+    },
+    error => {
+      console.log("No one logged in yet");
     });
   }
   title = 'repter-foglalo';

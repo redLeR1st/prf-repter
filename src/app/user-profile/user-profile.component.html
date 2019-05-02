@@ -24,15 +24,15 @@
           <mat-panel-title>
             {{res.hotel}}
           </mat-panel-title>
-          <mat-panel-description>
-            res.fullname
-          </mat-panel-description>
+          <!-- <mat-panel-description>
+            {{res.fullname}}
+          </mat-panel-description> -->
         </mat-expansion-panel-header>
         <h2>Number of rooms</h2>
-        <h3>re.room_number</h3>
+        <h3>{{res.room_number}}</h3>
         <br>
-        <h2>Number of available rooms</h2>
-        <h3>res.availalble_rooms</h3>
+        <h2>Reserved date</h2>
+        <h3>{{res.created}}</h3>
         <button color = "warn" mat-button *ngIf="user">Delete reservation</button>
         <!-- <h1>{{hotel.image}}</h1>
         <img src="{{hotel.image}}"> -->
