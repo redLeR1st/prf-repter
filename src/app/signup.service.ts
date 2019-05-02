@@ -9,11 +9,9 @@ import user from './model/user';
   providedIn: 'root'
 })
 export class SignupService {
-  delete_user() {
-    throw new Error("Method not implemented.");
-  }
 
   uri = 'https://prf-hotel-app.herokuapp.com';
+  cur_user: user;
   // uri = 'http://localhost:5000';
 
  
@@ -116,6 +114,57 @@ export class SignupService {
         .http
         .post(`${this.uri}/reservate`, obj, {responseType: "json", withCredentials: true})
         .subscribe(res => console.log('Done'));
+  }
+
+  delete_user(user) {
+  //   this.cur_user = null;
+  //   this.loged_in_user()
+  //     .subscribe((data: user) => {
+  //       this.cur_user = data;
+  //     });
+  //   if (this.cur_user.username == user.username) { //The deleted and the loged out user is the same
+
+  //   } else {
+  //     const obj = {
+  //       username: user.username
+  //     };
+  //     this
+  //       .http
+  //       .delete(`${this.uri}/user`, "asd")
+  //       .subscribe(res => console.log('Done'));
+  //   }
+  // }
+    console.log("FROM SERVICE: delete_user not implemented yet");
+  }
+
+  delete_hotel(hotel) {
+    console.log("FROM SERVICE: delete_hotel not implemented yet");
+  }
+
+  update_user(user: any, new_username, new_fname: any, new_email: any, new_pass: any) {
+    if (new_username === "") {
+      new_username = user.username;
+    }
+    if (new_fname === "") {
+      new_fname = user.fullname;
+    }
+    if (new_email === "") {
+      new_email = user.email;
+    }
+    if (new_pass === "") { //??????
+      new_pass = user.password;
+    }
+
+    const obj = {
+      username: user.username,
+      fullname: new_fname,
+      email: new_email,
+      password: new_pass
+    }
+    return this
+        .http
+        .put(`${this.uri}/user`, obj, {responseType: "json", withCredentials: true})
+        
   }
 
 }

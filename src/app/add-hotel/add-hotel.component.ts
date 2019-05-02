@@ -6,7 +6,7 @@ import Upload from 'material-ui-upload/Upload';
 @Component({
   selector: 'app-add-hotel',
   templateUrl: './add-hotel.component.html',
-  styleUrls: ['./add-hotel.component.css']
+  styleUrls: ['./add-hotel.component.scss']
 })
 export class AddHotelComponent implements OnInit {
 

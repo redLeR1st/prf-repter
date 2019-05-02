@@ -6,7 +6,7 @@ import user from '../model/user';
 @Component({
   selector: 'app-list-users',
   templateUrl: './list-users.component.html',
-  styleUrls: ['./list-users.component.css']
+  styleUrls: ['./list-users.component.scss']
 })
 export class ListUsersComponent implements OnInit {
 
@@ -22,7 +22,7 @@ export class ListUsersComponent implements OnInit {
       });
   }
 
-  delete_user() {
-    this.sv.delete_user();
+  delete_user(user: user) {
+    this.sv.delete_user(user);
   }
 }

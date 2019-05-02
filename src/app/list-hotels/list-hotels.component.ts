@@ -8,7 +8,7 @@ import { AppComponent } from '../app.component';
 @Component({
   selector: 'app-list-hotels',
   templateUrl: './list-hotels.component.html',
-  styleUrls: ['./list-hotels.component.css']
+  styleUrls: ['./list-hotels.component.scss']
 })
 export class ListHotelsComponent implements OnInit {
 
@@ -37,4 +37,7 @@ export class ListHotelsComponent implements OnInit {
     this.sv.reservate(hotel.qname, this.user.username, hotel.room_number);
   }
 
+  delete_hotel(hotel){
+    this.sv.delete_hotel(hotel);
+  }
 }
