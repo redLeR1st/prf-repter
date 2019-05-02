@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {SlimLoadingBarService} from 'ng2-slim-loading-bar';
 import { NavigationCancel,
         Event,
@@ -6,6 +6,8 @@ import { NavigationCancel,
         NavigationError,
         NavigationStart,
         Router } from '@angular/router';
+import { SignupService } from './signup.service';
+import user from './model/user';
 
 
 @Component({
@@ -13,9 +15,21 @@ import { NavigationCancel,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+
+  user = null;
+
+  ngOnInit(): void {
+    console.log("User\n");
+    this.sv
+      .loged_in_user()
+      .subscribe((data: user) => {
+        this.user = data;
+        console.log(this.user);
+    });
+  }
   title = 'repter-foglalo';
-  constructor(private _loadingBar: SlimLoadingBarService, private _router: Router) {
+  constructor(private _loadingBar: SlimLoadingBarService, private _router: Router, private sv: SignupService) {
     this._router.events.subscribe((event: Event) => {
       this.navigationInterceptor(event);
     });
@@ -34,4 +48,24 @@ export class AppComponent {
       this._loadingBar.stop();
     }
   }
+
+  log_out() {
+    console.log("log_out")
+    this.user = null;
+    this.sv.log_out();
+  }
+
+  loged_in_user() {
+    console.log("User\n");
+    this.sv
+      .loged_in_user()
+      .subscribe((data: user) => {
+        this.user = data;
+        console.log(this.user);
+      });
+  }
+  get_loged_in_user(){
+    return this.user;
+  }
+
 }

@@ -1,0 +1,51 @@
+<div fxLayout="column" fxLayoutAlign="space-around center">
+
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <!-- <mat-card-title *ngIf="user">{{user.username}}</mat-card-title> -->
+    <!-- <mat-card-title *ngIf="user">{{user.username}}</mat-card-title> -->
+    <mat-card-title *ngIf="user">{{user.username}}</mat-card-title>
+    <mat-card-subtitle *ngIf="user">{{user.fullname}}</mat-card-subtitle>
+    <mat-card-subtitle *ngIf="user">{{user.email}}</mat-card-subtitle>
+    
+  </mat-card-header>
+  <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+  <mat-card-content>
+    <!-- <p>
+      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+      A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+      bred for hunting.
+    </p> -->
+
+    <mat-accordion *ngIf="user">
+      <mat-expansion-panel *ngFor="let res of user.reservations">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{res.hotel}}
+          </mat-panel-title>
+          <mat-panel-description>
+            res.fullname
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <h2>Number of rooms</h2>
+        <h3>re.room_number</h3>
+        <br>
+        <h2>Number of available rooms</h2>
+        <h3>res.availalble_rooms</h3>
+        <button color = "warn" mat-button *ngIf="user">Delete reservation</button>
+        <!-- <h1>{{hotel.image}}</h1>
+        <img src="{{hotel.image}}"> -->
+      
+      </mat-expansion-panel>
+  </mat-accordion>
+  
+
+  </mat-card-content>
+  <mat-card-actions>
+    <button color = "primary" mat-button>Update</button>
+    <button color = "warn" mat-button>Delete</button>
+  </mat-card-actions>
+</mat-card>
+
+</div>

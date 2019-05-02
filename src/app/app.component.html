@@ -6,12 +6,15 @@
     <button mat-button [matMenuTriggerFor]="menu">Menu</button>
     <mat-menu #menu="matMenu">
       <a  mat-menu-item routerLink="listhotels" class="nav-link" routerLinkActive="active">Hotels</a>
-      <a  mat-menu-item routerLink="addhotel" class="nav-link" routerLinkActive="active">Add hotel</a>
+      <a  *ngIf="user && user.admin" mat-menu-item routerLink="addhotel" class="nav-link" routerLinkActive="active">Add hotel</a>
     </mat-menu>
     <span class = "gap"></span>
     <span class = "filler"></span>
-      <a mat-button routerLink="signup" class="nav-link" routerLinkActive="active">Sign-up</a>
-      <a mat-button routerLink="login" class="nav-link" routerLinkActive="active">Log-in</a>
+      <a *ngIf = "user == null" mat-button routerLink="signup" class="nav-link" routerLinkActive="active">Sign-up</a>
+      <a *ngIf = "user == null" mat-button routerLink="login" class="nav-link" routerLinkActive="active">Log-in</a>
+
+      <a *ngIf = "user != null" mat-button routerLink="user-profile" class="nav-link" routerLinkActive="active">{{user.username}}</a>
+      <a *ngIf = "user != null" mat-button routerLink="login" (click) = "log_out()" class="nav-link" routerLinkActive="active">Log-out</a>
 </mat-toolbar>
 <div class="container">
     <router-outlet></router-outlet>

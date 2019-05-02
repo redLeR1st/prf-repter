@@ -3,6 +3,7 @@ import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 import { SignupService } from '../signup.service';
 import { AlertService } from '../services/index';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
 
   angForm: FormGroup;
   msg;
-  constructor(private fb: FormBuilder, private sv: SignupService, private alertService: AlertService) {
+  constructor(private fb: FormBuilder, private sv: SignupService, private alertService: AlertService, private app: AppComponent) {
     this.createForm();
   }
 
@@ -29,6 +30,7 @@ export class LoginComponent implements OnInit {
     .subscribe(res => {
       console.log('Done');
       this.msg = "OK";
+      this.app.loged_in_user();
     },
     error => {
       console.log("error: " + error);
@@ -37,6 +39,8 @@ export class LoginComponent implements OnInit {
     });
   }
   
+
+
   ngOnInit() {
   }
 

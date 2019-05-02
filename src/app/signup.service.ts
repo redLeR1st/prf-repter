@@ -9,6 +9,7 @@ import user from './model/user';
   providedIn: 'root'
 })
 export class SignupService {
+
   uri = 'https://prf-hotel-app.herokuapp.com';
   // uri = 'http://localhost:5000';
 
@@ -16,6 +17,7 @@ export class SignupService {
   constructor(private http: HttpClient) { 
    
   }
+
 
   login(username: any, password: any) {
     var obj = {
@@ -56,7 +58,8 @@ export class SignupService {
       availalble_rooms: availablerooms,
       image: image
     };
-    console.log("signup: POST")
+    console.log("OBJ: ");
+    console.log(obj);
     this.http.post(`${this.uri}/new-hotel`, obj, {responseType: "text", withCredentials: true})
         .subscribe(res => console.log('Done'));
 
@@ -80,5 +83,30 @@ export class SignupService {
 
   }
 
+  loged_in_user() {
+    return this
+           .http
+           .get(`${this.uri}/logged-in-user`, {withCredentials: true});
+  }
+
+  log_out() {
+    this
+        .http
+        .post(`${this.uri}/logout`, {withCredentials: true});
+  }
+
+  reservate(qnmae, username, room_number) {
+    const obj = {
+      hotel: qnmae,
+      user: username,
+      room_number: room_number
+    };
+    console.log("RESERVE: \n");
+    console.log(obj);
+    this
+        .http
+        .post(`${this.uri}/reservate`, obj/*, {withCredentials: true}*/)
+        .subscribe(res => console.log('Done'));;
+  }
 
 }

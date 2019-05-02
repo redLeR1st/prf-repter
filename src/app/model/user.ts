@@ -4,7 +4,7 @@ export default class user {
   username: String;
   password:  String; 
   fullname: String;
-  admin: Boolean;
+  admin: boolean;
   email: String;
-  reservations: reservation
+  reservations: reservation[] = [];
   }

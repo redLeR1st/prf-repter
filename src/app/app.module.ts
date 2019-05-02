@@ -33,6 +33,12 @@ import { SignupService } from './signup.service';
 
 import { MatFileUploadModule } from 'angular-material-fileupload';
 
+
+import { CommonModule } from '@angular/common';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+
+import {MatCardModule} from '@angular/material/card';
+
 // import { Upload } from 'material-ui-upload/Upload';
 
 @NgModule({
@@ -42,7 +48,8 @@ import { MatFileUploadModule } from 'angular-material-fileupload';
     ListHotelsComponent,
     LoginComponent,
     AddHotelComponent,
-    AlertComponent
+    AlertComponent,
+    UserProfileComponent
   ],
   imports: [
     SlimLoadingBarModule,
@@ -61,6 +68,8 @@ import { MatFileUploadModule } from 'angular-material-fileupload';
     ReactiveFormsModule,
     HttpClientModule,
     MatFileUploadModule,
+    CommonModule,
+    MatCardModule
     // Upload
   ],
   providers: [
