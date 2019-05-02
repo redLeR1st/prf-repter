@@ -28,7 +28,7 @@ export class SignupService {
     }
 
     console.log("login: POST")
-    return this.http.post(`${this.uri}/login`, obj, { withCredentials: true})
+    return this.http.post(`${this.uri}/login`, obj, {responseType: "json", withCredentials: true})
     .catch(this.errorHandler);
 
   }
