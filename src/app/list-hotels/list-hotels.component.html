@@ -15,6 +15,7 @@
       <h3>{{hotel.availalble_rooms}}</h3>
 
       <button color = "primary" mat-button *ngIf="user" (click)="reservate(hotel)">Reserve</button>
+      <button color = "primary" mat-button *ngIf="isAdmin" (click)="start_edit(hotel)" routerLink="updatehotel" class="nav-link" routerLinkActive="active">Edit</button>
       <button color = "warn" mat-button *ngIf="isAdmin" (click)="delete_hotel(hotel)">Delete</button>
       <!-- <h1>{{hotel.image}}</h1>
       <img src="{{hotel.image}}"> -->

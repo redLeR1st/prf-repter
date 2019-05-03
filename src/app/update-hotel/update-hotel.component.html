@@ -1,0 +1,32 @@
+<div class="example-container">
+    <form [formGroup]="angForm">
+      <div fxLayout="column" fxLayoutAlign="space-around center" >
+        <h2>{{up.qname}}</h2>
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label>Hotel name</mat-label>
+            <input matInput placeholder="{{up.fullname}}" formControlName = "fullname">
+          </mat-form-field>
+        </div>
+        
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label>Room number</mat-label>
+            <input type = "number" matInput placeholder="{{up.room_number}}" formControlName = "roomnumber">
+          </mat-form-field>
+        </div>
+          
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label>Number of available rooms</mat-label>
+            <input type="number" matInput placeholder="{{up.availalble_rooms}}" formControlName = "availablerooms">
+          </mat-form-field>
+        </div>
+        
+        <div class="form-group">
+          <button color = "primary" mat-button type="submit" (click)="update_hotel(angForm.value)">Update</button>
+          <button color = "warn" mat-button routerLink=".." class="nav-link" routerLinkActive="active">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>

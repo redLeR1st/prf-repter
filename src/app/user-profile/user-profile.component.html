@@ -56,12 +56,13 @@
         <!-- <mat-card-title *ngIf="user">{{user.username}}</mat-card-title> -->
         <!-- <mat-card-title *ngIf="user">{{user.username}}</mat-card-title> -->
         <mat-card-title *ngIf="user">
-          <div class="form-group">
+          <!-- <div class="form-group">
             <mat-form-field>
               <mat-label>Username</mat-label>
               <input matInput placeholder="{{user.username}}" formControlName = "username">
             </mat-form-field>
-          </div>
+          </div> -->
+          <mat-card-title *ngIf="user">{{user.username}}</mat-card-title>
         </mat-card-title>
         <mat-card-subtitle *ngIf="user">
           <div class="form-group">
@@ -98,7 +99,7 @@
         </mat-card-content>
       <mat-card-actions>
         <div class="form-group">
-          <button type="submit" color = "primary" (click) = "save_changes(angForm.username, angForm.fullname, angForm.email, angForm.password)" mat-button>Save</button>
+          <button type="submit" color = "primary" (click) = "save_changes(angForm.value)" mat-button>Save</button>
         </div>
         <button color = "warn" (click) = "cancel_edit()" mat-button>Cancel</button>
       </mat-card-actions>

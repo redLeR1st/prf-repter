@@ -39,6 +39,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 
 import {MatCardModule} from '@angular/material/card';
 import { ListUsersComponent } from './list-users/list-users.component';
+import { UpdateHotelComponent } from "./update-hotel/UpdateHotelComponent";
 
 // import { Upload } from 'material-ui-upload/Upload';
 
@@ -51,7 +52,8 @@ import { ListUsersComponent } from './list-users/list-users.component';
     AddHotelComponent,
     AlertComponent,
     UserProfileComponent,
-    ListUsersComponent
+    ListUsersComponent,
+    UpdateHotelComponent
   ],
   imports: [
     SlimLoadingBarModule,

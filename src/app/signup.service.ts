@@ -12,6 +12,7 @@ export class SignupService {
 
   uri = 'https://prf-hotel-app.herokuapp.com';
   cur_user: user;
+  hotel_to_update: any;
   // uri = 'http://localhost:5000';
 
  
@@ -117,42 +118,46 @@ export class SignupService {
   }
 
   delete_user(user) {
-  //   this.cur_user = null;
-  //   this.loged_in_user()
-  //     .subscribe((data: user) => {
-  //       this.cur_user = data;
-  //     });
-  //   if (this.cur_user.username == user.username) { //The deleted and the loged out user is the same
+    this.cur_user = null;
+    this.loged_in_user()
+      .subscribe((data: user) => {
+        this.cur_user = data;
+      });
 
-  //   } else {
-  //     const obj = {
-  //       username: user.username
-  //     };
-  //     this
-  //       .http
-  //       .delete(`${this.uri}/user`, "asd")
-  //       .subscribe(res => console.log('Done'));
-  //   }
-  // }
-    console.log("FROM SERVICE: delete_user not implemented yet");
+    if (this.cur_user && this.cur_user.username == user.username) { //The deleted and the loged out user is the same
+      this.log_out();
+    } 
+    const obj = {
+      username: user.username
+    };
+    this
+      .http
+      .post(`${this.uri}/user`, obj, {responseType: "json", withCredentials: true})
+      .subscribe(res => console.log('Done'));
+    
   }
+    //console.log("FROM SERVICE: delete_user not implemented yet");
 
   delete_hotel(hotel) {
-    console.log("FROM SERVICE: delete_hotel not implemented yet");
+    const obj = {
+      qname: hotel.qname
+    }
+
+    console.log("delelte hotel:");
+    console.log(obj);
+
+    this
+      .http
+      .post(`${this.uri}/hotel`, obj, {responseType: "json", withCredentials: true})
+      .subscribe(res => console.log('Done'));
   }
 
   update_user(user: any, new_username, new_fname: any, new_email: any, new_pass: any) {
-    if (new_username === "") {
-      new_username = user.username;
-    }
     if (new_fname === "") {
       new_fname = user.fullname;
     }
     if (new_email === "") {
       new_email = user.email;
-    }
-    if (new_pass === "") { //??????
-      new_pass = user.password;
     }
 
     const obj = {
@@ -161,10 +166,42 @@ export class SignupService {
       email: new_email,
       password: new_pass
     }
+    console.log("OBJ to send: \n") 
+    console.log(obj)
     return this
         .http
         .put(`${this.uri}/user`, obj, {responseType: "json", withCredentials: true})
         
   }
+  update_hotel(fullname, room_number: any, availalble_rooms : any) {
+    if (fullname === "") {
+      fullname = this.hotel_to_update.fullname;
+    }
+    if (!room_number) {
+      room_number = this.hotel_to_update.room_number;
+    }
+    if (!availalble_rooms) {
+      availalble_rooms = this.hotel_to_update.availalble_rooms;
+    }
 
+    const obj = {
+      qname: this.hotel_to_update.qname,
+      fullname: fullname,
+      room_number: room_number,
+      availalble_rooms: availalble_rooms
+    }
+    console.log("OBJ to send: \n") 
+    console.log(obj)
+    console.log("update_hotel \n") 
+    console.log(this.hotel_to_update)
+    return this
+        .http
+        .put(`${this.uri}/hotel`, obj, {responseType: "json", withCredentials: true})
+  }
+
+  setHotel_to_update(hotel: any) {
+    console.log("This hotel will be updated:")
+    console.log(hotel);
+    this.hotel_to_update = hotel;
+  }
 }

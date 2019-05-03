@@ -30,6 +30,7 @@ export class UserProfileComponent implements OnInit {
  
 
   ngOnInit() {
+    this.edit = false;
     console.log("User\n");
     this.sv
       .loged_in_user()
@@ -46,12 +47,11 @@ export class UserProfileComponent implements OnInit {
   cancel_edit() {
     this.edit = false;
   }
-  save_changes(new_uname, new_fname, new_email, new_pass) {
+  save_changes(form) {
     console.log("SAVE MEE");
-    this.sv.update_user(this.user, new_uname, new_fname, new_email, new_pass)
+    this.sv.update_user(this.user, form.username, form.fullname, form.email, form.password)
     .subscribe(res => this.edit = false), err => {console.log(err)};
   }
-
   delete_user() {
     this.sv.delete_user(user);
   }
