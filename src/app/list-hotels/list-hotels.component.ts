@@ -5,6 +5,7 @@ import user from '../model/user';
 import { isAbsolute } from 'path';
 import { AppComponent } from '../app.component';
 import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-list-hotels',
@@ -23,9 +24,12 @@ export class ListHotelsComponent implements OnInit {
 
   index_of_hotel = -1;
   hotel_to_update: any;
+  show_me_how_to_live: any;
+  base64Flag: string;
+  state: { img: string; };
+  picture: any;
 
-  constructor(protected fb: FormBuilder, protected sv: SignupService, protected app: AppComponent) {
-
+  constructor(private sanitizer:DomSanitizer, protected fb: FormBuilder, protected sv: SignupService, protected app: AppComponent) {
    }
    get_hotel_to_update() {
      return this.hotel_to_update;
@@ -40,11 +44,18 @@ export class ListHotelsComponent implements OnInit {
     });
   }
 
+  arrayBufferToBase64(buffer) {
+    var binary = '';
+    var bytes = [].slice.call(new Uint8Array(buffer));
+    bytes.forEach((b) => binary += String.fromCharCode(b));
+    return window.btoa(binary);
+};
+
+
   ngOnInit() {
     this.angForm = this.fb.group({
       hotel_forms: this.fb.array([this.createHotel()])
     });
-
 
     console.log("this.hotel_forms");
     console.log(this.hotel_forms);
@@ -54,7 +65,13 @@ export class ListHotelsComponent implements OnInit {
     console.log("List_hotels\n");
     this.sv
       .getHotels()
-      .subscribe((data: hotel[]) => {
+      .subscribe((data: any[]) => {
+        console.log(data[0].images[0].data);
+        this.base64Flag = 'data:image/jpeg;base64,';
+        this.show_me_how_to_live = this.arrayBufferToBase64(data[0].images[0].data.data);
+
+        this.picture = this.base64Flag + this.show_me_how_to_live;
+
         this.hotels = data;
       });
 
@@ -77,17 +94,6 @@ export class ListHotelsComponent implements OnInit {
   cancel_edit() {
     this.edit = false;
     this.index_of_hotel = -1;
-  }
-  save_changes(i, form) {
-    console.log("SAVE MEEhotel num: " + i);
-    console.log(this.hotels[i]);
-    console.log("fnam: " + form.fullname);
-    console.log("numroom: " + form.num_of_rooms);
-    console.log("numavblroom: " + form.num_of_avlb_rooms);
-    
-
-    this.sv.update_hotel(form.fullname, form.num_of_rooms, form.num_of_avlb_rooms)
-    .subscribe(res => {/*this.index_of_hotel = -1*/}), err => {console.log(err)};
   }
 
   delete_hotel(hotel){

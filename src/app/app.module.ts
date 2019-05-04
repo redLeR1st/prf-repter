@@ -39,7 +39,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 
 import {MatCardModule} from '@angular/material/card';
 import { ListUsersComponent } from './list-users/list-users.component';
-import { UpdateHotelComponent } from "./update-hotel/UpdateHotelComponent";
+import { UpdateHotelComponent } from "./update-hotel/update-hotel.component";
 
 // import { Upload } from 'material-ui-upload/Upload';
 

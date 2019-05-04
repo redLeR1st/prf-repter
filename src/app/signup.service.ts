@@ -4,6 +4,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs';
 import user from './model/user';
+import hotel from './model/hotel';
 
 @Injectable({
   providedIn: 'root'
@@ -52,16 +53,18 @@ export class SignupService {
   }
 
   addHotel(hotelname, hotelfullname, roomnumber, availablerooms, image) {
-    const obj = {
-      qname: hotelname,
-      fullname: hotelfullname,
-      room_number: roomnumber,
-      availalble_rooms: availablerooms,
-      image: image
-    };
-    console.log("OBJ: ");
-    console.log(obj);
-    this.http.post(`${this.uri}/new-hotel`, obj, {responseType: "json", withCredentials: true})
+    
+    var fd = new FormData();
+
+    fd.append("qname", hotelname);
+    fd.append("fullname", hotelfullname);
+    fd.append("room_number", roomnumber);
+    fd.append("availalble_rooms", availablerooms);
+    fd.append('image', image, image.name);
+
+    console.log("FormData: ");
+    console.log(fd);
+    this.http.post(`${this.uri}/new-hotel`, fd, {responseType: "json", withCredentials: true})
         .subscribe(res => console.log('Done'));
 
   }
@@ -194,9 +197,10 @@ export class SignupService {
     console.log(obj)
     console.log("update_hotel \n") 
     console.log(this.hotel_to_update)
-    return this
+    this
         .http
         .put(`${this.uri}/hotel`, obj, {responseType: "json", withCredentials: true})
+        .subscribe(res => console.log('Done'), err => console.log(err));
   }
 
   setHotel_to_update(hotel: any) {

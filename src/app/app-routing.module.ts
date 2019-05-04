@@ -6,7 +6,7 @@ import { ListHotelsComponent } from './list-hotels/list-hotels.component';
 import { AddHotelComponent } from './add-hotel/add-hotel.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ListUsersComponent } from './list-users/list-users.component';
-import { UpdateHotelComponent } from "./update-hotel/UpdateHotelComponent";
+import { UpdateHotelComponent } from "./update-hotel/update-hotel.component";
 
 const routes: Routes = [
   {
