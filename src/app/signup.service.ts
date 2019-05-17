@@ -10,6 +10,7 @@ import hotel from './model/hotel';
   providedIn: 'root'
 })
 export class SignupService {
+  
 
   uri = 'https://prf-hotel-app.herokuapp.com';
   cur_user: user;
@@ -60,8 +61,9 @@ export class SignupService {
     fd.append("fullname", hotelfullname);
     fd.append("room_number", roomnumber);
     fd.append("availalble_rooms", availablerooms);
-    fd.append('image', image, image.name);
-
+    if (image) {
+      fd.append('image', image, image.name);
+    }
     console.log("FormData: ");
     console.log(fd);
     this.http.post(`${this.uri}/new-hotel`, fd, {responseType: "json", withCredentials: true})
@@ -97,6 +99,14 @@ export class SignupService {
     return this
            .http
            .get(`${this.uri}/logged-in-user`, {responseType: "json", withCredentials: true});
+  }
+  loged_in_user_subscriber() : user {
+    var dat:user
+    this.loged_in_user().subscribe((data: user) => {
+      console.log(data);
+      dat = data;
+    });
+    return dat;
   }
 
   log_out() {

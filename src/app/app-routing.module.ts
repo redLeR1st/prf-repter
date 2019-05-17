@@ -7,6 +7,8 @@ import { AddHotelComponent } from './add-hotel/add-hotel.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ListUsersComponent } from './list-users/list-users.component';
 import { UpdateHotelComponent } from "./update-hotel/update-hotel.component";
+import { RoleGuard } from './guards/role-guard.service';
+import { AuthGuard } from './guards/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -23,18 +25,25 @@ const routes: Routes = [
   },
   {
     path: 'addhotel',
-    component: AddHotelComponent
+    component: AddHotelComponent,
+    canActivate: [RoleGuard],
+    data: {role: 'Admin'}
   },
   {
     path: 'user-profile',
-    component: UserProfileComponent
+    component: UserProfileComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'listusers',
-    component: ListUsersComponent
+    component: ListUsersComponent,
+    canActivate: [RoleGuard],
+    data: {role: 'Admin'}
   },{
     path: 'listhotels/updatehotel',
-    component: UpdateHotelComponent
+    component: UpdateHotelComponent,
+    canActivate: [RoleGuard],
+    data: {role: 'Admin'}
   }
 ];
 

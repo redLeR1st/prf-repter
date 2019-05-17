@@ -40,6 +40,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import {MatCardModule} from '@angular/material/card';
 import { ListUsersComponent } from './list-users/list-users.component';
 import { UpdateHotelComponent } from "./update-hotel/update-hotel.component";
+import { AuthGuard } from './guards/auth-guard.service';
+import { RoleGuard } from './guards/role-guard.service';
 
 // import { Upload } from 'material-ui-upload/Upload';
 
@@ -78,7 +80,9 @@ import { UpdateHotelComponent } from "./update-hotel/update-hotel.component";
   ],
   providers: [
     SignupService,
-    AlertService
+    AlertService,
+    AuthGuard,
+    RoleGuard
   ],
   bootstrap: [AppComponent]
 })
