@@ -18,8 +18,8 @@
       <button color = "primary" mat-button *ngIf="isAdmin" (click)="start_edit(hotel)" routerLink="updatehotel" class="nav-link" routerLinkActive="active">Edit</button>
       <button color = "warn" mat-button *ngIf="isAdmin" (click)="delete_hotel(hotel)">Delete</button>
       <h1>Photos</h1>
-      <!-- <img [attr.src]="data:image/jpg;base64,{{hotel.images[0]}}" alt="Kep"> -->
-      <img src="{{picture}}" >
+      <!-- <img src="{{picture}}" > -->
+      <img class="img-responsive smaller" src="{{picture}}" />
     
     </mat-expansion-panel>
 </mat-accordion>
