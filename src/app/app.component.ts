@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import {SlimLoadingBarService} from 'ng2-slim-loading-bar';
 import { NavigationCancel,
         Event,
@@ -8,6 +8,8 @@ import { NavigationCancel,
         Router } from '@angular/router';
 import { SignupService } from './signup.service';
 import user from './model/user';
+import { Logout_success } from './sb-container/sb-container.component';
+import { MatSnackBar } from '@angular/material';
 
 
 @Component({
@@ -18,8 +20,29 @@ import user from './model/user';
 export class AppComponent implements OnInit {
 
   user = null;
+  durationInSeconds: number = 5;
+
+  public innerWidth: any;
+  public isSmall: boolean = true;
+  
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.innerWidth = window.innerWidth;
+    if (this.innerWidth < 700) {
+      this.isSmall = true;
+    } else {
+      this.isSmall = false;
+    }
+  }
 
   ngOnInit(): void {
+    this.innerWidth = window.innerWidth;
+    if (this.innerWidth < 70) {
+      this.isSmall = true;
+    } else {
+      this.isSmall = false;
+    }
     //if (this.user) {
     console.log("User\n");
     this.sv
@@ -35,7 +58,7 @@ export class AppComponent implements OnInit {
   }
 
   title = 'repter-foglalo';
-  constructor(private _loadingBar: SlimLoadingBarService, private _router: Router, private sv: SignupService) {
+  constructor(private _loadingBar: SlimLoadingBarService, private _router: Router, private sv: SignupService, private snackBar: MatSnackBar) {
     this._router.events.subscribe((event: Event) => {
       this.navigationInterceptor(event);
     });
@@ -55,12 +78,17 @@ export class AppComponent implements OnInit {
     }
   }
 
-  log_out() {
+  log_out(isSnack) {
     console.log("log_out")
     this.sv.log_out().subscribe(res => {
       console.log('Done')
       this.user = null;
       this._router.navigate(['/login']);
+      if (isSnack) {
+        this.snackBar.openFromComponent(Logout_success, {
+          duration: this.durationInSeconds * 1000
+        });
+      }
     });
   }
 

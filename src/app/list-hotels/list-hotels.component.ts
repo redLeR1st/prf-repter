@@ -6,6 +6,8 @@ import { isAbsolute } from 'path';
 import { AppComponent } from '../app.component';
 import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
 import {DomSanitizer} from '@angular/platform-browser';
+import { DialogContentExampleDialog } from '../sb-container/sb-container.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-list-hotels',
@@ -29,7 +31,7 @@ export class ListHotelsComponent implements OnInit {
   state: { img: string; };
   picture: any;
 
-  constructor(private sanitizer:DomSanitizer, protected fb: FormBuilder, protected sv: SignupService, protected app: AppComponent) {
+  constructor(private sanitizer:DomSanitizer, protected fb: FormBuilder, protected sv: SignupService, protected app: AppComponent, private dialog: MatDialog) {
    }
    get_hotel_to_update() {
      return this.hotel_to_update;
@@ -52,6 +54,24 @@ export class ListHotelsComponent implements OnInit {
 };
 
 
+  list_this_hotels() {
+    console.log("List_hotels\n");
+    this.sv
+      .getHotels()
+      .subscribe((data: any[]) => {
+        if (data.length != 0) {
+          console.log(data[0].images[0].data);
+          this.base64Flag = 'data:image/jpeg;base64,';
+          this.show_me_how_to_live = this.arrayBufferToBase64(data[0].images[0].data.data);
+
+          this.picture = this.base64Flag + this.show_me_how_to_live;
+
+          this.hotels = data;
+        }
+      });
+
+  }
+
   ngOnInit() {
     this.angForm = this.fb.group({
       hotel_forms: this.fb.array([this.createHotel()])
@@ -62,19 +82,7 @@ export class ListHotelsComponent implements OnInit {
 
     this.edit = false;
     this.index_of_hotel = -1;
-    console.log("List_hotels\n");
-    this.sv
-      .getHotels()
-      .subscribe((data: any[]) => {
-        console.log(data[0].images[0].data);
-        this.base64Flag = 'data:image/jpeg;base64,';
-        this.show_me_how_to_live = this.arrayBufferToBase64(data[0].images[0].data.data);
-
-        this.picture = this.base64Flag + this.show_me_how_to_live;
-
-        this.hotels = data;
-      });
-
+    this.list_this_hotels();
     console.log("User\n");
     this.user = this.app.get_loged_in_user();
     if (this.user) {
@@ -96,7 +104,20 @@ export class ListHotelsComponent implements OnInit {
     this.index_of_hotel = -1;
   }
 
-  delete_hotel(hotel){
-    this.sv.delete_hotel(hotel);
+  async delete_hotel(hotel: hotel){
+    const dialogRef = this.dialog.open(DialogContentExampleDialog, {
+      data: {name: hotel.qname}
+    });
+    
+    await dialogRef.afterClosed().toPromise().then(async result => {
+      console.log(`Dialog result: ${result}`);      
+      
+      if (result) {
+        await this.sv.delete_hotel(hotel).toPromise().then(result => console.log("Done"));
+        console.log("Refresh");
+        this.list_this_hotels();
+      }
+    });
+    // this.sv.delete_hotel(hotel);
   }
 }

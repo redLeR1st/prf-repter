@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 import { SignupService } from '../signup.service';
 import { PasswordValidation } from '../PasswordValidation';
+import { MatSnackBar } from '@angular/material';
+import { Signup_success, Signup_error } from '../sb-container/sb-container.component';
 
 @Component({
   selector: 'app-signup',
@@ -13,7 +15,8 @@ export class SignupComponent implements OnInit {
 
   
   angForm: FormGroup;
-  constructor(private fb: FormBuilder, private signup_sv: SignupService) {
+  durationInSeconds: number = 5;
+  constructor(private fb: FormBuilder, private signup_sv: SignupService, private snackBar: MatSnackBar) {
     this.createForm();
   }
 
@@ -35,7 +38,17 @@ export class SignupComponent implements OnInit {
 // }
 
   signup(form) {
-    this.signup_sv.signup(form.username, form.fullname, form.password, form.email);
+    this.signup_sv.signup(form.username, form.fullname, form.password, form.email)
+    .subscribe(res => {
+      console.log('Done');
+      this.snackBar.openFromComponent(Signup_success, {
+        duration: this.durationInSeconds * 1000,
+      });
+    }, error => {
+      this.snackBar.openFromComponent(Signup_error, {
+        duration: this.durationInSeconds * 1000,
+      });
+    });
   }
 
   ngOnInit() {

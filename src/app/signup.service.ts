@@ -49,13 +49,14 @@ export class SignupService {
       admin: false
     };
     console.log("signup: POST")
-    this.http.post(`${this.uri}/register`, obj, {responseType: "json", withCredentials: true})
-        .subscribe(res => console.log('Done'));
+    return this.http.post(`${this.uri}/register`, obj, {responseType: "json", withCredentials: true})
   }
 
   addHotel(hotelname, hotelfullname, roomnumber, availablerooms, image) {
     
     var fd = new FormData();
+
+    console.log(hotelname);
 
     fd.append("qname", hotelname);
     fd.append("fullname", hotelfullname);
@@ -148,10 +149,10 @@ export class SignupService {
     const obj = {
       username: user.username
     };
-    this
+    return this
       .http
       .post(`${this.uri}/user`, obj, {responseType: "json", withCredentials: true})
-      .subscribe(res => console.log('Done'));
+      
     
   }
     //console.log("FROM SERVICE: delete_user not implemented yet");
@@ -164,10 +165,10 @@ export class SignupService {
     console.log("delelte hotel:");
     console.log(obj);
 
-    this
+    return this
       .http
       .post(`${this.uri}/hotel`, obj, {responseType: "json", withCredentials: true})
-      .subscribe(res => console.log('Done'));
+      
   }
 
   update_user(user: any, new_username, new_fname: any, new_email: any, new_pass: any) {

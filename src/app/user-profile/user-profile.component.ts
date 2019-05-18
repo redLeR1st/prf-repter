@@ -3,6 +3,10 @@ import { SignupService } from '../signup.service';
 import user from '../model/user';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subscriber } from 'rxjs';
+import { Router } from '@angular/router';
+import { Delete_yourselfe, DialogContentExampleDialog } from '../sb-container/sb-container.component';
+import { MatSnackBar, MatDialog } from '@angular/material';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -14,8 +18,10 @@ export class UserProfileComponent implements OnInit {
   edit = false;
 
   angForm: FormGroup;
+  durationInSeconds: number = 5;
   
-  constructor(private fb: FormBuilder, private sv: SignupService) {
+  constructor(private fb: FormBuilder, private sv: SignupService, private _router: Router, private snackBar: MatSnackBar,
+    private app: AppComponent, private dialog: MatDialog) {
     this.createForm();
   }
   
@@ -53,7 +59,38 @@ export class UserProfileComponent implements OnInit {
     this.sv.update_user(this.user, form.username, form.fullname, form.email, form.password)
     .subscribe(res => this.edit = false), err => {console.log(err)};
   }
-  delete_user() {
-    this.sv.delete_user(user);
+  async delete_user() {
+    const dialogRef = this.dialog.open(DialogContentExampleDialog, {
+      data: {name: "YOURSELF"}
+    });
+    
+    await dialogRef.afterClosed().toPromise().then(async result => {
+      console.log(`Dialog result: ${result}`);      
+      
+      if (result) {
+        await this.sv.delete_user(this.user)
+        .toPromise().then(res => {
+          console.log('Done')
+          this._router.navigate(['/login']);
+          this.snackBar.openFromComponent(Delete_yourselfe, {
+            duration: this.durationInSeconds * 1000,
+          });
+          
+          this.app.log_out(false);
+        });
+        console.log("Refresh");
+      }
+    });
+    
+    // this.sv.delete_user(this.user)
+    // .subscribe(res => {
+    //   console.log('Done')
+    //   this._router.navigate(['/login']);
+    //   this.snackBar.openFromComponent(Delete_yourselfe, {
+    //     duration: this.durationInSeconds * 1000,
+    //   });
+      
+    //   this.app.log_out(false);
+    // });
   }
 }

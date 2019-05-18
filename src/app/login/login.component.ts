@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 import { SignupService } from '../signup.service';
 import { AlertService } from '../services/index';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { AppComponent } from '../app.component';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material';
+import { PizzaPartyComponent_sucsess, PizzaPartyComponent_failed } from '../sb-container/sb-container.component';
 
 @Component({
   selector: 'app-login',
@@ -27,8 +27,6 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  
-
   login(form) {
     this.sv.login(form.username, form.password)
     .subscribe(res => {
@@ -45,32 +43,8 @@ export class LoginComponent implements OnInit {
       });
     });
   }
-  
-
 
   ngOnInit() {
   }
 
 }
-
-@Component({
-  selector: 'snack-bar-component-example-snack-sucsess',
-  templateUrl: 'snack-bar-component-example-snack-succ.html',
-  styles: [`
-    .example-pizza-party {
-      color: hotpink;
-    }
-  `],
-})
-export class PizzaPartyComponent_sucsess {}
-
-@Component({
-  selector: 'snack-bar-component-example-snack-failed',
-  templateUrl: 'snack-bar-component-example-snack-fail.html',
-  styles: [`
-    .example-pizza-party {
-      color: hotpink;
-    }
-  `],
-})
-export class PizzaPartyComponent_failed {}

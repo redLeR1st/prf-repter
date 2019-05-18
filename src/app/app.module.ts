@@ -8,7 +8,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
 import { ListHotelsComponent } from './list-hotels/list-hotels.component';
-import { LoginComponent, PizzaPartyComponent_sucsess, PizzaPartyComponent_failed } from './login/login.component';
+import { LoginComponent} from './login/login.component';
+import { PizzaPartyComponent_sucsess, PizzaPartyComponent_failed, Logout_success, Signup_success, Signup_error, DialogContentExampleDialog, Delete_yourselfe } from './sb-container/sb-container.component';
 import { AddHotelComponent } from './add-hotel/add-hotel.component';
 
 import { AlertComponent } from './directives/index';
@@ -25,7 +26,8 @@ import {
   MatFormFieldModule,
   MatOptionModule,
   MatInputModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatDialogModule
 } from '@angular/material';
 
 import { ReactiveFormsModule } from '@angular/forms';
@@ -44,6 +46,7 @@ import { ListUsersComponent } from './list-users/list-users.component';
 import { UpdateHotelComponent } from "./update-hotel/update-hotel.component";
 import { AuthGuard } from './guards/auth-guard.service';
 import { RoleGuard } from './guards/role-guard.service';
+import { SbContainerComponent } from './sb-container/sb-container.component';
 
 // import { Upload } from 'material-ui-upload/Upload';
 
@@ -59,11 +62,22 @@ import { RoleGuard } from './guards/role-guard.service';
     ListUsersComponent,
     UpdateHotelComponent,
     PizzaPartyComponent_sucsess,
-    PizzaPartyComponent_failed
+    PizzaPartyComponent_failed,
+    SbContainerComponent,
+    Logout_success,
+    Signup_success,
+    Signup_error,
+    DialogContentExampleDialog,
+    Delete_yourselfe
   ],
   entryComponents: [
     PizzaPartyComponent_sucsess,
-    PizzaPartyComponent_failed
+    PizzaPartyComponent_failed,
+    Logout_success,
+    Signup_success,
+    Signup_error,
+    DialogContentExampleDialog,
+    Delete_yourselfe
   ],
   imports: [
     SlimLoadingBarModule,
@@ -84,7 +98,8 @@ import { RoleGuard } from './guards/role-guard.service';
     MatFileUploadModule,
     CommonModule,
     MatCardModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
     // Upload
   ],
   providers: [
