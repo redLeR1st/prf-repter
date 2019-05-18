@@ -4,6 +4,7 @@ import { SignupService } from '../signup.service';
 import { AlertService } from '../services/index';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { AppComponent } from '../app.component';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
 
   angForm: FormGroup;
   msg;
-  constructor(private fb: FormBuilder, private sv: SignupService, private alertService: AlertService, private app: AppComponent) {
+  durationInSeconds: number = 5;
+  constructor(private fb: FormBuilder, private sv: SignupService, private alertService: AlertService, private app: AppComponent, private snackBar : MatSnackBar) {
     this.createForm();
   }
 
@@ -25,17 +27,22 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  
+
   login(form) {
     this.sv.login(form.username, form.password)
     .subscribe(res => {
       console.log('Done');
-      this.msg = "OK";
+      this.snackBar.openFromComponent(PizzaPartyComponent_sucsess, {
+        duration: this.durationInSeconds * 1000,
+      });
       this.app.loged_in_user();
     },
     error => {
-      console.log("error: " + error);
-      if (error.includes("Forbidden"))
-        this.msg = "Forbidden";
+      console.log("error");
+      this.snackBar.openFromComponent(PizzaPartyComponent_failed, {
+        duration: this.durationInSeconds * 1000,
+      });
     });
   }
   
@@ -45,3 +52,25 @@ export class LoginComponent implements OnInit {
   }
 
 }
+
+@Component({
+  selector: 'snack-bar-component-example-snack-sucsess',
+  templateUrl: 'snack-bar-component-example-snack-succ.html',
+  styles: [`
+    .example-pizza-party {
+      color: hotpink;
+    }
+  `],
+})
+export class PizzaPartyComponent_sucsess {}
+
+@Component({
+  selector: 'snack-bar-component-example-snack-failed',
+  templateUrl: 'snack-bar-component-example-snack-fail.html',
+  styles: [`
+    .example-pizza-party {
+      color: hotpink;
+    }
+  `],
+})
+export class PizzaPartyComponent_failed {}

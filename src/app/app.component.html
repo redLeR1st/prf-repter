@@ -15,7 +15,7 @@
       <a *ngIf = "user == null" mat-button routerLink="login" class="nav-link" routerLinkActive="active">Log-in</a>
 
       <a *ngIf = "user != null" mat-button routerLink="user-profile" class="nav-link" routerLinkActive="active">{{user.username}}</a>
-      <a *ngIf = "user != null" mat-button routerLink="login" (click) = "log_out()" class="nav-link" routerLinkActive="active">Log-out</a>
+      <a *ngIf = "user != null" mat-button (click) = "log_out()" class="nav-link" routerLinkActive="active">Log-out</a>
 </mat-toolbar>
 <div class="container">
     <router-outlet></router-outlet>

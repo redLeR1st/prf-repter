@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
   user = null;
 
   ngOnInit(): void {
+    //if (this.user) {
     console.log("User\n");
     this.sv
       .loged_in_user()
@@ -30,7 +31,9 @@ export class AppComponent implements OnInit {
     error => {
       console.log("No one logged in yet");
     });
+   // }
   }
+
   title = 'repter-foglalo';
   constructor(private _loadingBar: SlimLoadingBarService, private _router: Router, private sv: SignupService) {
     this._router.events.subscribe((event: Event) => {
@@ -54,8 +57,11 @@ export class AppComponent implements OnInit {
 
   log_out() {
     console.log("log_out")
-    this.user = null;
-    this.sv.log_out();
+    this.sv.log_out().subscribe(res => {
+      console.log('Done')
+      this.user = null;
+      this._router.navigate(['/login']);
+    });
   }
 
   loged_in_user() {

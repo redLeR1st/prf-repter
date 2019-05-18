@@ -96,24 +96,28 @@ export class SignupService {
   // }
 
   loged_in_user() {
-    return this
+    // return {
+    //   getPackings: function() {
+        return this
            .http
            .get(`${this.uri}/logged-in-user`, {responseType: "json", withCredentials: true});
+    //   }
+    // }
   }
-  loged_in_user_subscriber() : user {
-    var dat:user
-    this.loged_in_user().subscribe((data: user) => {
-      console.log(data);
-      dat = data;
-    });
-    return dat;
+
+  async loged_in_user_directly() {
+    try {
+      return await this.loged_in_user().toPromise();
+    } catch {
+      console.log('No user logged in!');
+    }
   }
 
   log_out() {
-    this
+    var misemegyertelmubb_minthogy_ide_egy_ures_Adat_kell = {}
+    return this
         .http
-        .post(`${this.uri}/logout`, {responseType: "json", withCredentials: true})
-        .subscribe(res => console.log('Done'));
+        .post(`${this.uri}/logout`, misemegyertelmubb_minthogy_ide_egy_ures_Adat_kell, {responseType: "json", withCredentials: true})
   }
 
   reservate(qnmae, username, room_number) {
@@ -132,13 +136,14 @@ export class SignupService {
 
   delete_user(user) {
     this.cur_user = null;
-    this.loged_in_user()
-      .subscribe((data: user) => {
+    this.loged_in_user().subscribe((data: user) => {
         this.cur_user = data;
       });
 
     if (this.cur_user && this.cur_user.username == user.username) { //The deleted and the loged out user is the same
-      this.log_out();
+      this.log_out().subscribe(res => {
+        console.log('Done');
+      });;
     } 
     const obj = {
       username: user.username

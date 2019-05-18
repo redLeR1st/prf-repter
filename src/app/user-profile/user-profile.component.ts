@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SignupService } from '../signup.service';
 import user from '../model/user';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Subscriber } from 'rxjs';
 
 @Component({
   selector: 'app-user-profile',

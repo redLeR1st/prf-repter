@@ -8,11 +8,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
 import { ListHotelsComponent } from './list-hotels/list-hotels.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent, PizzaPartyComponent_sucsess, PizzaPartyComponent_failed } from './login/login.component';
 import { AddHotelComponent } from './add-hotel/add-hotel.component';
 
 import { AlertComponent } from './directives/index';
 import { AlertService } from './services/index';
+
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
@@ -55,7 +57,13 @@ import { RoleGuard } from './guards/role-guard.service';
     AlertComponent,
     UserProfileComponent,
     ListUsersComponent,
-    UpdateHotelComponent
+    UpdateHotelComponent,
+    PizzaPartyComponent_sucsess,
+    PizzaPartyComponent_failed
+  ],
+  entryComponents: [
+    PizzaPartyComponent_sucsess,
+    PizzaPartyComponent_failed
   ],
   imports: [
     SlimLoadingBarModule,
@@ -75,7 +83,8 @@ import { RoleGuard } from './guards/role-guard.service';
     HttpClientModule,
     MatFileUploadModule,
     CommonModule,
-    MatCardModule
+    MatCardModule,
+    MatSnackBarModule
     // Upload
   ],
   providers: [
