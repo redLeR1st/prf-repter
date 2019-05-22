@@ -21,6 +21,7 @@ export class ListUsersComponent implements OnInit {
     this.sv.getUsers()
       .subscribe((data: user[]) => {
         this.users = data;
+        console.log(this.users);
       });
   }
 
@@ -42,6 +43,5 @@ export class ListUsersComponent implements OnInit {
         this.get_the_users();
       }
     });
-    // this.sv.delete_user(user);
   }
 }

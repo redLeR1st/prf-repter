@@ -70,8 +70,7 @@ export class SignupService {
     // }
     console.log("FormData: ");
     console.log(fd);
-    this.http.post(`${this.uri}/new-hotel`, fd, {responseType: "json", withCredentials: true})
-        .subscribe(res => console.log('Done'));
+    return this.http.post(`${this.uri}/new-hotel`, fd, {responseType: "json", withCredentials: true})        
 
   }
 
@@ -132,10 +131,10 @@ export class SignupService {
     };
     console.log("RESERVE: \n");
     console.log(obj);
-    this
+    return this
         .http
         .post(`${this.uri}/reservate`, obj, {responseType: "json", withCredentials: true})
-        .subscribe(res => console.log('Done'));
+        
   }
 
   delete_user(user) {
@@ -226,5 +225,21 @@ export class SignupService {
     console.log("This hotel will be updated:")
     console.log(hotel);
     this.hotel_to_update = hotel;
+  }
+
+  invalidate_reservation(qname: string, username: string, room_number) {
+
+    const obj = {
+      qname: qname,
+      username: username,
+      room_number:room_number
+    }
+
+    console.log("OBJ to send: \n") 
+    console.log(obj)
+    return this
+        .http
+        .put(`${this.uri}/invalidate-reservation`, obj, {responseType: "json", withCredentials: true})
+        
   }
 }

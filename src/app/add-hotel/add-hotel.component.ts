@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 import { SignupService } from '../signup.service';
 import Upload from 'material-ui-upload/Upload';
+import { Hotel_added } from '../sb-container/sb-container.component';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-add-hotel',
@@ -13,7 +15,8 @@ export class AddHotelComponent implements OnInit {
   image = null
 
   angForm: FormGroup;
-  constructor(private fb: FormBuilder, private signup_sv: SignupService) {
+  durationInSeconds: number = 5;
+  constructor(private fb: FormBuilder, private signup_sv: SignupService, private snackBar: MatSnackBar) {
     this.createForm();
   }
 
@@ -29,6 +32,12 @@ export class AddHotelComponent implements OnInit {
 
   addHotel(form) {
     this.signup_sv.addHotel(form.hotelname, form.hotelfullname, form.roomnumber, form.availablerooms, this.image)
+    .subscribe(res => {
+      console.log('Done')
+      this.snackBar.openFromComponent(Hotel_added, {
+        duration: this.durationInSeconds * 1000,
+      });
+    });
   }
 
   // onFileLoad = (e, file) => console.log(e.target.result, file.name);

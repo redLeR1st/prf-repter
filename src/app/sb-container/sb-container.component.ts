@@ -115,3 +115,31 @@ onNoClick(): void {
   `],
 })
 export class Delete_yourselfe {}
+
+@Component({
+  selector: 'Hotel_added',
+  templateUrl: 'Hotel_added.html',
+  styles: [`
+    .example-pizza-party {
+      color: hotpink;
+    }
+    p {
+      text-align: center;
+    }
+  `],
+})
+export class Hotel_added {}
+
+@Component({
+  selector: 'Hotel_reserved',
+  templateUrl: 'Hotel_reserved.html',
+  styles: [`
+    .example-pizza-party {
+      color: hotpink;
+    }
+    p {
+      text-align: center;
+    }
+  `],
+})
+export class Hotel_reserved {}

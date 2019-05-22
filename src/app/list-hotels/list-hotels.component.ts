@@ -6,8 +6,8 @@ import { isAbsolute } from 'path';
 import { AppComponent } from '../app.component';
 import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
 import {DomSanitizer} from '@angular/platform-browser';
-import { DialogContentExampleDialog } from '../sb-container/sb-container.component';
-import { MatDialog } from '@angular/material';
+import { DialogContentExampleDialog, Hotel_reserved } from '../sb-container/sb-container.component';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { async } from '@angular/core/testing';
 
 @Component({
@@ -31,8 +31,11 @@ export class ListHotelsComponent implements OnInit {
   base64Flag: string;
   state: { img: string; };
   picture: any;
+  durationInSeconds: number = 5;
 
-  constructor(private sanitizer:DomSanitizer, protected fb: FormBuilder, protected sv: SignupService, protected app: AppComponent, private dialog: MatDialog) {
+  constructor(private sanitizer:DomSanitizer, protected fb: FormBuilder,
+    protected sv: SignupService, protected app: AppComponent,
+    private dialog: MatDialog, private snackBar: MatSnackBar) {
    }
    get_hotel_to_update() {
      return this.hotel_to_update;
@@ -100,7 +103,13 @@ export class ListHotelsComponent implements OnInit {
   }
 
   reservate(hotel: hotel) {
-    this.sv.reservate(hotel.qname, this.user.username, hotel.room_number);
+    this.sv.reservate(hotel.qname, this.user.username, hotel.room_number).
+    subscribe(res => {
+      console.log('Done')
+      this.snackBar.openFromComponent(Hotel_reserved, {
+        duration: this.durationInSeconds * 1000,
+      });
+    });
   }
 
   start_edit(hotel) {

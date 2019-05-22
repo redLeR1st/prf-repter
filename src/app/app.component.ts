@@ -59,7 +59,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.innerWidth = window.innerWidth;
-    if (this.innerWidth < 70) {
+    if (this.innerWidth < 700) {
       this.isSmall = true;
     } else {
       this.isSmall = false;
