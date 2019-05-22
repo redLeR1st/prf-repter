@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, HostBinding, ElementRef } from '@angular/core';
 import {SlimLoadingBarService} from 'ng2-slim-loading-bar';
 import { NavigationCancel,
         Event,
@@ -10,6 +10,7 @@ import { SignupService } from './signup.service';
 import user from './model/user';
 import { Logout_success } from './sb-container/sb-container.component';
 import { MatSnackBar } from '@angular/material';
+import { OverlayContainer } from '@angular/cdk/overlay';
 
 
 @Component({
@@ -18,6 +19,14 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+
+  constructor(private _loadingBar: SlimLoadingBarService, private _router: Router, private sv: SignupService, private snackBar: MatSnackBar
+    ,public overlayContainer: OverlayContainer, private elementRef: ElementRef) {
+    this._router.events.subscribe((event: Event) => {
+      this.navigationInterceptor(event);
+    });
+  }
+
 
   user = null;
   durationInSeconds: number = 5;
@@ -33,6 +42,18 @@ export class AppComponent implements OnInit {
       this.isSmall = true;
     } else {
       this.isSmall = false;
+    }
+  }
+
+  @HostBinding('class') componentCssClass;
+
+  onSetTheme(theme) {
+    this.overlayContainer.getContainerElement().classList.add(theme);
+    this.componentCssClass = theme;
+    if (theme == 'dark-theme') {
+      this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#545454';
+    } else {
+      this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#ffffff';
     }
   }
 
@@ -58,11 +79,7 @@ export class AppComponent implements OnInit {
   }
 
   title = 'repter-foglalo';
-  constructor(private _loadingBar: SlimLoadingBarService, private _router: Router, private sv: SignupService, private snackBar: MatSnackBar) {
-    this._router.events.subscribe((event: Event) => {
-      this.navigationInterceptor(event);
-    });
-  }
+  
   private navigationInterceptor(event: Event): void {
     if (event instanceof NavigationStart) {
       this._loadingBar.start();

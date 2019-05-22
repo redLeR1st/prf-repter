@@ -19,6 +19,6 @@
       No
     </h3>
     
-    <button color = "warn" mat-button (click) = "delete_user(user)">Delete</button>
+    <button *ngIf="!user.admin" color = "warn" mat-button (click) = "delete_user(user)">Delete</button>
   </mat-expansion-panel>
 </mat-accordion>

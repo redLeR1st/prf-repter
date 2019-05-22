@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ElementRef } from '@angular/core';
 
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
@@ -47,6 +47,7 @@ import { UpdateHotelComponent } from "./update-hotel/update-hotel.component";
 import { AuthGuard } from './guards/auth-guard.service';
 import { RoleGuard } from './guards/role-guard.service';
 import { SbContainerComponent } from './sb-container/sb-container.component';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 // import { Upload } from 'material-ui-upload/Upload';
 
@@ -99,7 +100,8 @@ import { SbContainerComponent } from './sb-container/sb-container.component';
     CommonModule,
     MatCardModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    OverlayModule
     // Upload
   ],
   providers: [

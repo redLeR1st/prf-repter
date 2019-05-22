@@ -15,13 +15,13 @@
         
         <div class="form-group">
           <mat-form-field>
-            <input type="number" matInput placeholder="Number of rooms" formControlName = "roomnumber">
+            <input type="number" min="0" oninput="validity.valid||(value='');" matInput placeholder="Number of rooms" formControlName = "roomnumber">
           </mat-form-field>
         </div>
         
         <div class="form-group">
           <mat-form-field>
-            <input type="number" matInput placeholder="Available rooms" formControlName = "availablerooms">
+            <input type="number" min="0" oninput="validity.valid||(value='');" matInput placeholder="Available rooms" formControlName = "availablerooms">
           </mat-form-field>
         </div>
 
