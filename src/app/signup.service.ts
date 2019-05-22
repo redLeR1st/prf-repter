@@ -227,13 +227,16 @@ export class SignupService {
     this.hotel_to_update = hotel;
   }
 
-  invalidate_reservation(qname: string, username: string, room_number) {
+  invalidate_reservation(user: user, hotel: any) {
 
     const obj = {
-      qname: qname,
-      username: username,
-      room_number:room_number
+      hotel: hotel.hotel,
+      user: user.username,
+      room_number: hotel.room_number
     }
+
+    console.log("to send:")
+    console.log(obj)
 
     console.log("OBJ to send: \n") 
     console.log(obj)

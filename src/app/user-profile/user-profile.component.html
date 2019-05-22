@@ -36,8 +36,10 @@
           <h2>Reserved date</h2>
           <h3>{{res.created}}</h3>
           
-          <h2 *ngIf="res.valid == true">Valid reservation</h2>
-          <h2 *ngIf="res.valid != true">InValid reservation</h2>
+          <h2 *ngIf="res.valid == true">Reservation status</h2>
+          
+          <mat-slide-toggle *ngIf="res.valid == true" checked=true disabled=true>Valid reservation</mat-slide-toggle>
+          <mat-slide-toggle *ngIf="res.valid != true" checked=false disabled=true>InValid reservation</mat-slide-toggle>
           
           <!-- <button color = "warn" mat-button *ngIf="user">Delete reservation</button> -->
           <!-- <h1>{{hotel.image}}</h1>

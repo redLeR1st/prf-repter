@@ -4,6 +4,7 @@ import user from '../model/user';
 import { DialogContentExampleDialog } from '../sb-container/sb-container.component';
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
+import hotel from '../model/hotel';
 
 @Component({
   selector: 'app-list-users',
@@ -29,12 +30,11 @@ export class ListUsersComponent implements OnInit {
     this.get_the_users();
   }
 
-  invalidate_reservation(user: user, res) {
+  async invalidate_reservation(user: user, hotel) {
 
-    
-
-    this.sv.invalidate_reservation("tmepl", "temp", 2).subscribe(res => {
+    await this.sv.invalidate_reservation(user, hotel).toPromise().then(res => {
       console.log("Done");
+      this.get_the_users();
     })
   }
 
