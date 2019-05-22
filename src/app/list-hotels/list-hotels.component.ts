@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
 import {DomSanitizer} from '@angular/platform-browser';
 import { DialogContentExampleDialog } from '../sb-container/sb-container.component';
 import { MatDialog } from '@angular/material';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-list-hotels',
@@ -54,22 +55,30 @@ export class ListHotelsComponent implements OnInit {
 };
 
 
-  list_this_hotels() {
+  async list_this_hotels() {
     console.log("List_hotels\n");
-    this.sv
+    await this.sv
       .getHotels()
-      .subscribe((data: any[]) => {
+        .subscribe((data: any[]) => {
         if (data.length != 0) {
           console.log(data[0].images[0].data);
           this.base64Flag = 'data:image/jpeg;base64,';
-          this.show_me_how_to_live = this.arrayBufferToBase64(data[0].images[0].data.data);
-
-          this.picture = this.base64Flag + this.show_me_how_to_live;
-
+          
+          // data.forEach(async function(element, index) {
+           
+          for (var i = 0; i < data.length; i++) {
+            if (data[i].images[0]) {
+              this.show_me_how_to_live = this.arrayBufferToBase64(data[i].images[0].data.data);
+              this.picture = this.base64Flag + this.show_me_how_to_live;
+              data[i].images[0] = this.picture;
+            } else {
+              data[i].images[0] = "no_image";
+            }
+          }
+          // });
           this.hotels = data;
         }
       });
-
   }
 
   ngOnInit() {

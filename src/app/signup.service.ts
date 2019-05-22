@@ -64,7 +64,10 @@ export class SignupService {
     fd.append("availalble_rooms", availablerooms);
     if (image) {
       fd.append('image', image, image.name);
-    }
+    } 
+    // else {
+    //   fd.append('image', null, null);
+    // }
     console.log("FormData: ");
     console.log(fd);
     this.http.post(`${this.uri}/new-hotel`, fd, {responseType: "json", withCredentials: true})
