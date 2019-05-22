@@ -6,7 +6,7 @@ import { isAbsolute } from 'path';
 import { AppComponent } from '../app.component';
 import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
 import {DomSanitizer} from '@angular/platform-browser';
-import { DialogContentExampleDialog, Hotel_reserved } from '../sb-container/sb-container.component';
+import { DialogContentExampleDialog, Hotel_reserved, Hotel_delete } from '../sb-container/sb-container.component';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { async } from '@angular/core/testing';
 
@@ -134,7 +134,11 @@ export class ListHotelsComponent implements OnInit {
         await this.sv.delete_hotel(hotel).toPromise().then(result => console.log("Done"));
         console.log("Refresh");
         this.list_this_hotels();
+        this.snackBar.openFromComponent(Hotel_delete, {
+          duration: this.durationInSeconds * 1000,
+        });
       }
+      
     });
     // this.sv.delete_hotel(hotel);
   }

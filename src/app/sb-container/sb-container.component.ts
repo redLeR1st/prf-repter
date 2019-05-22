@@ -143,3 +143,17 @@ export class Hotel_added {}
   `],
 })
 export class Hotel_reserved {}
+
+@Component({
+  selector: 'Hotel_delete',
+  templateUrl: 'Hotel_delete.html',
+  styles: [`
+    .example-pizza-party {
+      color: hotpink;
+    }
+    p {
+      text-align: center;
+    }
+  `],
+})
+export class Hotel_delete {}

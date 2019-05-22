@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
 import { ListHotelsComponent } from './list-hotels/list-hotels.component';
 import { LoginComponent} from './login/login.component';
-import { PizzaPartyComponent_sucsess, PizzaPartyComponent_failed, Logout_success, Signup_success, Signup_error, DialogContentExampleDialog, Delete_yourselfe, Hotel_added, Hotel_reserved } from './sb-container/sb-container.component';
+import { PizzaPartyComponent_sucsess, PizzaPartyComponent_failed, Logout_success, Signup_success, Signup_error, DialogContentExampleDialog, Delete_yourselfe, Hotel_added, Hotel_reserved, Hotel_delete } from './sb-container/sb-container.component';
 import { AddHotelComponent } from './add-hotel/add-hotel.component';
 
 import { AlertComponent } from './directives/index';
@@ -71,7 +71,8 @@ import { OverlayModule } from '@angular/cdk/overlay';
     DialogContentExampleDialog,
     Delete_yourselfe,
     Hotel_added,
-    Hotel_reserved    
+    Hotel_reserved,
+    Hotel_delete    
   ],
   entryComponents: [
     PizzaPartyComponent_sucsess,
@@ -82,7 +83,8 @@ import { OverlayModule } from '@angular/cdk/overlay';
     DialogContentExampleDialog,
     Delete_yourselfe,
     Hotel_added,
-    Hotel_reserved
+    Hotel_reserved,
+    Hotel_delete
   ],
   imports: [
     SlimLoadingBarModule,
