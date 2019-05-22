@@ -29,6 +29,15 @@ export class ListUsersComponent implements OnInit {
     this.get_the_users();
   }
 
+  invalidate_reservation(user: user, res) {
+
+    
+
+    this.sv.invalidate_reservation("tmepl", "temp", 2).subscribe(res => {
+      console.log("Done");
+    })
+  }
+
   async delete_user(user: user) {
     const dialogRef = this.dialog.open(DialogContentExampleDialog, {
       data: {name: user.username}

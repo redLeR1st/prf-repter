@@ -27,7 +27,9 @@ import {
   MatOptionModule,
   MatInputModule,
   MatExpansionModule,
-  MatDialogModule
+  MatDialogModule,
+  MatSlideToggle,
+  MatSlideToggleModule
 } from '@angular/material';
 
 import { ReactiveFormsModule } from '@angular/forms';
@@ -107,7 +109,8 @@ import { OverlayModule } from '@angular/cdk/overlay';
     MatCardModule,
     MatSnackBarModule,
     MatDialogModule,
-    OverlayModule
+    OverlayModule,
+    MatSlideToggleModule
     // Upload
   ],
   providers: [

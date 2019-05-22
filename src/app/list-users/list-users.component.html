@@ -19,7 +19,7 @@
       No
     </h3>
 
-    <!-- <mat-expansion-panel *ngFor="let res of user.reservations">
+    <mat-expansion-panel *ngFor="let res of user.reservations">
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{res.hotel}}
@@ -30,11 +30,13 @@
       <br>
       <h2>Reserved date</h2>
       <h3>{{res.created}}</h3>
+
+      <h2>Reservation is valid?</h2>
       
-      <h2 *ngIf="res.valid == true">Valid reservation</h2>
-      <h2 *ngIf="res.valid != true">InValid reservation</h2>
+      <mat-slide-toggle *ngIf="res.valid == true" checked=true >Valid reservation</mat-slide-toggle>
+      <mat-slide-toggle *ngIf="res.valid != true" checked=false >InValid reservation</mat-slide-toggle>
     
-    </mat-expansion-panel> -->
+    </mat-expansion-panel>
     
     <button *ngIf="!user.admin" color = "warn" mat-button (click) = "delete_user(user)">Delete</button>
   </mat-expansion-panel>

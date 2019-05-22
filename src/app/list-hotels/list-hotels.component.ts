@@ -138,7 +138,6 @@ export class ListHotelsComponent implements OnInit {
           duration: this.durationInSeconds * 1000,
         });
       }
-      
     });
     // this.sv.delete_hotel(hotel);
   }
