@@ -34,11 +34,12 @@ export class AppComponent implements OnInit {
   public innerWidth: any;
   public isSmall: boolean = true;
   
+  width = 600;
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.innerWidth = window.innerWidth;
-    if (this.innerWidth < 700) {
+    if (this.innerWidth < this.width) {
       this.isSmall = true;
     } else {
       this.isSmall = false;
@@ -59,7 +60,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.innerWidth = window.innerWidth;
-    if (this.innerWidth < 700) {
+    if (this.innerWidth < this.width) {
       this.isSmall = true;
     } else {
       this.isSmall = false;

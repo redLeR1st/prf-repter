@@ -19,7 +19,7 @@
     "@angular/compiler": "~7.2.0",
     "@angular/compiler-cli": "^7.2.14",
     "@angular/core": "~7.2.0",
-    "@angular/flex-layout": "github:angular/flex-layout-builds",
+    "@angular/flex-layout": "^7.0.0-beta.24",
     "@angular/forms": "~7.2.0",
     "@angular/material": "github:angular/material2-builds#8873f67f2988f214d09b55b15f2e10a5d9b5bb0d",
     "@angular/platform-browser": "~7.2.0",
