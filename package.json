@@ -18,7 +18,7 @@
     "@angular/common": "~7.2.0",
     "@angular/compiler": "~7.2.0",
     "@angular/compiler-cli": "^7.2.14",
-    "@angular/core": "~7.2.0",
+    "@angular/core": "~11.0.5",
     "@angular/flex-layout": "^7.0.0-beta.24",
     "@angular/forms": "~7.2.0",
     "@angular/material": "github:angular/material2-builds#8873f67f2988f214d09b55b15f2e10a5d9b5bb0d",
